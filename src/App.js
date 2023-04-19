@@ -4,6 +4,7 @@ import './App.css';
 
 function App() {
   /* Vai dar certo */
+  /* Iniciando requisito 2 */
   return (
     <div className="App">
       <header className="App-header">
