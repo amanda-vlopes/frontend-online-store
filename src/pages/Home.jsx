@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
 import { getCategories, getProductByQuery } from '../services/api';
+import './Home.css';
 
 export default class Home extends Component {
   state = {
@@ -34,11 +34,17 @@ export default class Home extends Component {
   render() {
     const { categorias, nomeProduto, produtos } = this.state;
     return (
-      <>
-        <Header />
-        <div>
+      <div className="container">
+        <div className="categorias__list">
           { categorias.map(({ name, id }) => (
-            <button key={ id } data-testid="category">{name}</button>
+            <button
+              key={ id }
+              className="categoria__btn"
+              data-testid="category"
+            >
+              {name}
+
+            </button>
           ))}
         </div>
         <div>
@@ -71,14 +77,18 @@ export default class Home extends Component {
               : 'Nenhum produto foi encontrado'}
           </h3>
           { produtos.map(({ title, price, thumbnail, id }) => (
-            <div key={ id } data-testid="product">
+            <ul
+              key={ id }
+              data-testid="product"
+              className="card__products"
+            >
               <img src={ thumbnail } alt={ title } />
               <p>{ title }</p>
               <p>{ price }</p>
-            </div>
+            </ul>
           ))}
         </div>
-      </>
+      </div>
     );
   }
 }
