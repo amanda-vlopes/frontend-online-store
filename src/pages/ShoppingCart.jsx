@@ -3,7 +3,7 @@ import './ShoppingCart.css';
 
 export default class ShoppingCart extends Component {
   render() {
-    const savedProducts = JSON.parse(localStorage.getItem('cart') || []);
+    const savedProducts = JSON.parse(localStorage.getItem('cart')) || [];
     console.log(savedProducts.length);
     return (
       <div>
