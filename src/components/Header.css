@@ -42,7 +42,7 @@ h3 {
   text-decoration: none;
 }
 
-.nav__header button:hover, .nav__header a:hover {
+.nav__header button:hover {
   background-color: #2aac7e;
 }
 

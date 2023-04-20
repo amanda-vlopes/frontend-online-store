@@ -41,6 +41,20 @@ li {
   margin: 0.5em;
 }
 
+li > button {
+  background-color: #2fc18f;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  margin-top: 5px;
+  padding: 8px;
+}
+
+li > button:hover {
+  background-color: #2aac7e;
+  cursor: pointer;
+}
+
 .home-message {
   background-color: #212423;
 }
