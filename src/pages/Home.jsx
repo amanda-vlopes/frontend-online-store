@@ -22,45 +22,47 @@ export default class Home extends Component {
     const { categorias } = this.state;
     const { produtos, nomeProduto, handleCategory } = this.props;
     return (
-      <div className="container">
-        <div className="categorias__list">
-          { categorias.map(({ name, id }) => (
-            <button
-              key={ id }
-              id={ id }
-              className="categoria__btn"
-              data-testid="category"
-              onClick={ handleCategory }
-            >
-              {name}
-
-            </button>
-          ))}
-        </div>
-        <div>
+      <>
+        <div className="home-message">
           <h3 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h3>
-        </div>
-        <div>
           <h3>
             {produtos.length > 0
               ? `Produtos relacionados a: ${nomeProduto}`
               : 'Nenhum produto foi encontrado'}
           </h3>
-          { produtos.map(({ title, price, thumbnail, id }) => (
-            <ul
-              key={ id }
-              data-testid="product"
-              className="card__products"
-            >
-              <img src={ thumbnail } alt={ title } />
-              <p>{ title }</p>
-              <p>{ price }</p>
-            </ul>
-          ))}
         </div>
-      </div>
+        <div className="container">
+          <div className="categorias__list">
+            { categorias.map(({ name, id }) => (
+              <button
+                key={ id }
+                id={ id }
+                className="categoria__btn"
+                data-testid="category"
+                onClick={ handleCategory }
+              >
+                {name}
+
+              </button>
+            ))}
+          </div>
+          <div>
+            { produtos.map(({ title, price, thumbnail, id }) => (
+              <ul
+                key={ id }
+                data-testid="product"
+                className="card__products"
+              >
+                <img src={ thumbnail } alt={ title } />
+                <p>{ title }</p>
+                <p>{ price }</p>
+              </ul>
+            ))}
+          </div>
+        </div>
+      </>
     );
   }
 }
