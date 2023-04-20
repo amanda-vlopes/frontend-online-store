@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { getCategories } from '../services/api';
 import './Home.css';
@@ -12,7 +13,6 @@ export default class Home extends Component {
     const categorias = await getCategories();
     this.setState({ categorias });
   }
-
   // handleCategory = async () => {
   //   const produtosCategoria = await getProductByCategory('MLB5672');
   //   // console.log(produtosCategoria);
@@ -49,17 +49,32 @@ export default class Home extends Component {
             ))}
           </div>
           <div>
-            { produtos.map(({ title, price, thumbnail, id }) => (
-              <ul
-                key={ id }
-                data-testid="product"
-                className="card__products"
-              >
-                <img src={ thumbnail } alt={ title } />
-                <p>{ title }</p>
-                <p>{ price }</p>
-              </ul>
-            ))}
+            <h3 data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </h3>
+          </div>
+          <div>
+            <h3>
+              {produtos.length > 0
+                ? `Produtos relacionados a: ${nomeProduto}`
+                : 'Nenhum produto foi encontrado'}
+            </h3>
+            <ul>
+              { produtos.map(({ title, price, thumbnail, id }) => (
+                <Link key={ id } to={ `product/${id}` } data-testid="product-detail-link">
+                  <li
+                    key={ id }
+                    id={ id }
+                    data-testid="product"
+                    className="card__products"
+                  >
+                    <img src={ thumbnail } alt={ title } />
+                    <p>{ title }</p>
+                    <p>{ price }</p>
+                  </li>
+                </Link>
+              ))}
+            </ul>
           </div>
         </div>
       </>
@@ -68,6 +83,10 @@ export default class Home extends Component {
 }
 
 Home.propTypes = {
+  handleCategory: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
   nomeProduto: PropTypes.string.isRequired,
   produtos: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
@@ -75,5 +94,4 @@ Home.propTypes = {
     thumbnail: PropTypes.string,
     id: PropTypes.string,
   })).isRequired,
-  handleCategory: PropTypes.func.isRequired,
 };
