@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 
-export default class Carrinho extends Component {
+export default class ShoppingCart extends Component {
   render() {
     return (
       <div>
