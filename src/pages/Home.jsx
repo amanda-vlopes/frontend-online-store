@@ -13,17 +13,24 @@ export default class Home extends Component {
     this.setState({ categorias });
   }
 
+  // handleCategory = async () => {
+  //   const produtosCategoria = await getProductByCategory('MLB5672');
+  //   // console.log(produtosCategoria);
+  // }
+
   render() {
     const { categorias } = this.state;
-    const { produtos, nomeProduto } = this.props;
+    const { produtos, nomeProduto, handleCategory } = this.props;
     return (
       <div className="container">
         <div className="categorias__list">
           { categorias.map(({ name, id }) => (
             <button
               key={ id }
+              id={ id }
               className="categoria__btn"
               data-testid="category"
+              onClick={ handleCategory }
             >
               {name}
 
@@ -31,7 +38,6 @@ export default class Home extends Component {
           ))}
         </div>
         <div>
-          {/* Link requisito 3 - redireciona para a pagina ShoppingCart */}
           <h3 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h3>
@@ -67,4 +73,5 @@ Home.propTypes = {
     thumbnail: PropTypes.string,
     id: PropTypes.string,
   })).isRequired,
+  handleCategory: PropTypes.func.isRequired,
 };

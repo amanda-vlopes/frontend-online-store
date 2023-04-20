@@ -4,7 +4,7 @@ import './App.css';
 import Header from './components/Header';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
-import { getProductByQuery } from './services/api';
+import { getProductByQuery, getProductByCategory } from './services/api';
 
 class App extends React.Component {
   state = {
@@ -23,6 +23,14 @@ class App extends React.Component {
     const { nomeProduto } = this.state;
     const data = await getProductByQuery(nomeProduto);
     const produtos = data.results;
+    this.setState({
+      produtos,
+    });
+  };
+
+  handleCategory = async ({ target }) => {
+    const produtosCategoria = await getProductByCategory(target.id);
+    const produtos = produtosCategoria.results;
     this.setState({
       produtos,
     });
@@ -47,6 +55,7 @@ class App extends React.Component {
                 { ...props }
                 produtos={ produtos }
                 nomeProduto={ nomeProduto }
+                handleCategory={ this.handleCategory }
               />) }
           />
           <Route exact path="/shoppingcart" component={ ShoppingCart } />
