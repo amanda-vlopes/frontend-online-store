@@ -1,13 +1,7 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
-  // handleSearch = () => {
-  //   const { history } = this.props;
-  //   history.push('/carrinho');
-  // };
-
   render() {
     return (
       <header>
@@ -22,9 +16,3 @@ export default class Header extends Component {
     );
   }
 }
-
-Header.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-};
