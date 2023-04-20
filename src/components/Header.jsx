@@ -26,7 +26,7 @@ export default class Header extends Component {
           </button>
         </div>
         <img src={ logo } alt="Logo" />
-        <Link to="/shoppingcart" data-testid="shopping-cart-button">Carrinho</Link>
+        <Link to="/shoppingcart" data-testid="shopping-cart-button"><img src="https://cdn-icons-png.flaticon.com/512/7595/7595338.png" alt="" /></Link>
       </header>
     );
   }

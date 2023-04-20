@@ -49,16 +49,6 @@ export default class Home extends Component {
             ))}
           </div>
           <div>
-            <h3 data-testid="home-initial-message">
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </h3>
-          </div>
-          <div>
-            <h3>
-              {produtos.length > 0
-                ? `Produtos relacionados a: ${nomeProduto}`
-                : 'Nenhum produto foi encontrado'}
-            </h3>
             <ul>
               { produtos.map(({ title, price, thumbnail, id }) => (
                 <Link key={ id } to={ `product/${id}` } data-testid="product-detail-link">
