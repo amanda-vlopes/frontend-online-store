@@ -39,7 +39,7 @@ export default class Home extends Component {
           { categorias.map(({ name, id }) => (
             <button
               key={ id }
-              className="categorias__btn"
+              className="categoria__btn"
               data-testid="category"
             >
               {name}
