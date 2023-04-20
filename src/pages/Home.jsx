@@ -13,10 +13,22 @@ export default class Home extends Component {
     const categorias = await getCategories();
     this.setState({ categorias });
   }
-  // handleCategory = async () => {
-  //   const produtosCategoria = await getProductByCategory('MLB5672');
-  //   // console.log(produtosCategoria);
-  // }
+
+  handleAddToCart = (event, img, price, title) => {
+    const { id } = event.target;
+    price = price.toLocaleString(
+      'pt-BR',
+      { style: 'currency', currency: 'BRL' },
+    );
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const product = cart.find((item) => item.id === id);
+    if (product) {
+      product.quantity += 1;
+    } else {
+      cart.push({ id, title, img, price, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+  };
 
   render() {
     const { categorias } = this.state;
@@ -51,18 +63,31 @@ export default class Home extends Component {
           <div>
             <ul>
               { produtos.map(({ title, price, thumbnail, id }) => (
-                <Link key={ id } to={ `product/${id}` } data-testid="product-detail-link">
-                  <li
+                <li
+                  key={ id }
+                  id={ id }
+                  data-testid="product"
+                  className="card__products"
+                >
+                  <Link
                     key={ id }
-                    id={ id }
-                    data-testid="product"
-                    className="card__products"
+                    to={ `product/${id}` }
+                    data-testid="product-detail-link"
                   >
                     <img src={ thumbnail } alt={ title } />
                     <p>{ title }</p>
                     <p>{ price }</p>
-                  </li>
-                </Link>
+                  </Link>
+                  <button
+                    data-testid="product-add-to-cart"
+                    onClick={ (event) => {
+                      this.handleAddToCart(event, thumbnail, price, title);
+                    } }
+                    id={ id }
+                  >
+                    Adicionar ao carrinho
+                  </button>
+                </li>
               ))}
             </ul>
           </div>
