@@ -1,21 +1,23 @@
 .container {
+  background-color: #212423;
   display: flex;
+  justify-content: space-between;
 }
 
 .categorias__list {
-  box-shadow: 2px 2px 8px gray;
+  box-shadow: rgb(131 131 131) -1px 3px 8px 0;
   display: flex;
   flex-direction: column;
   width: 15%;
 }
 
 .categoria__btn {
-  background-color: white;
+  background-color: #202222;
   border: none;
-  color: black;
+  border-top: 1px solid #87bb6f91;
   cursor: pointer;
   font-size: 1rem;
-  padding: 0.5em 0 0 1em;
+  padding: 0.4em 0.5em;
   padding-top: 0.5em;
   text-align: left;
 }
@@ -26,9 +28,19 @@
 }
 
 .card__products {
-  background-color: white;
-  box-shadow: 2px 2px 8px gray;
+  background-color: #1b1d1d;
+  border-radius: 8px;
+  box-shadow: rgb(96, 104, 108) 0 2px 7px;
   margin: 1em;
   padding: 1em;
   text-align: center;
+}
+
+li {
+  list-style: none;
+  margin: 0.5em;
+}
+
+.home-message {
+  background-color: #212423;
 }

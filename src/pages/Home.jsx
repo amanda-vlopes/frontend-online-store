@@ -22,50 +22,52 @@ export default class Home extends Component {
     const { categorias } = this.state;
     const { produtos, nomeProduto, handleCategory } = this.props;
     return (
-      <div className="container">
-        <div className="categorias__list">
-          { categorias.map(({ name, id }) => (
-            <button
-              key={ id }
-              id={ id }
-              className="categoria__btn"
-              data-testid="category"
-              onClick={ handleCategory }
-            >
-              {name}
-
-            </button>
-          ))}
-        </div>
-        <div>
+      <>
+        <div className="home-message">
           <h3 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h3>
-        </div>
-        <div>
           <h3>
             {produtos.length > 0
               ? `Produtos relacionados a: ${nomeProduto}`
               : 'Nenhum produto foi encontrado'}
           </h3>
-          <ul>
-            { produtos.map(({ title, price, thumbnail, id }) => (
-              <Link key={ id } to={ `product/${id}` } data-testid="product-detail-link">
-                <li
-                  key={ id }
-                  id={ id }
-                  data-testid="product"
-                  className="card__products"
-                >
-                  <img src={ thumbnail } alt={ title } />
-                  <p>{ title }</p>
-                  <p>{ price }</p>
-                </li>
-              </Link>
-            ))}
-          </ul>
         </div>
-      </div>
+        <div className="container">
+          <div className="categorias__list">
+            { categorias.map(({ name, id }) => (
+              <button
+                key={ id }
+                id={ id }
+                className="categoria__btn"
+                data-testid="category"
+                onClick={ handleCategory }
+              >
+                {name}
+
+              </button>
+            ))}
+          </div>
+          <div>
+            <ul>
+              { produtos.map(({ title, price, thumbnail, id }) => (
+                <Link key={ id } to={ `product/${id}` } data-testid="product-detail-link">
+                  <li
+                    key={ id }
+                    id={ id }
+                    data-testid="product"
+                    className="card__products"
+                  >
+                    <img src={ thumbnail } alt={ title } />
+                    <p>{ title }</p>
+                    <p>{ price }</p>
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </>
     );
   }
 }
