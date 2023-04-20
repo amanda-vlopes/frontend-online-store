@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+}
+
+.categorias__list {
+  box-shadow: 2px 2px 8px gray;
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+}
+
+.categorias__btn {
+  background-color: white;
+  border: none;
+  color: black;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5em 0 0 1em;
+  padding-top: 0.5em;
+  text-align: left;
+}
+
+.categorias__btn:hover {
+  color: #003be5;
+  text-decoration: underline;
+}
+
+.card__products {
+  background-color: white;
+  box-shadow: 2px 2px 8px gray;
+  margin: 1em;
+  padding: 1em;
+  text-align: center;
+}
