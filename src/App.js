@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Home from './pages/Home';
+import ProductDetails from './pages/ProductDetails';
 import ShoppingCart from './pages/ShoppingCart';
 import { getProductByQuery, getProductByCategory } from './services/api';
 
@@ -59,6 +60,7 @@ class App extends React.Component {
               />) }
           />
           <Route exact path="/shoppingcart" component={ ShoppingCart } />
+          <Route path="/product/:id" component={ ProductDetails } />
         </Switch>
       </div>
     );
