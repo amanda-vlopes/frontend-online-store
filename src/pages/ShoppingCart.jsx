@@ -13,6 +13,7 @@ export default class ShoppingCart extends Component {
             savedProducts.map(({ id, title, img, price, quantity }) => (
               <div
                 key={ id }
+                className="cart-product"
               >
                 <img src={ img } alt={ title } />
                 <p
