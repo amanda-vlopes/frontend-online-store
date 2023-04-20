@@ -1,13 +1,11 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { getCategories, getProductByQuery } from '../services/api';
+import { getCategories } from '../services/api';
 import './Home.css';
 
 export default class Home extends Component {
   state = {
     categorias: [],
-    nomeProduto: '',
-    produtos: [],
   };
 
   async componentDidMount() {
@@ -15,32 +13,24 @@ export default class Home extends Component {
     this.setState({ categorias });
   }
 
-  handleChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  handleSearch = async () => {
-    const { nomeProduto } = this.state;
-    const data = await getProductByQuery(nomeProduto);
-    const produtos = data.results;
-    this.setState({
-      produtos,
-    });
-  };
+  // handleCategory = async () => {
+  //   const produtosCategoria = await getProductByCategory('MLB5672');
+  //   // console.log(produtosCategoria);
+  // }
 
   render() {
-    const { categorias, nomeProduto, produtos } = this.state;
+    const { categorias } = this.state;
+    const { produtos, nomeProduto, handleCategory } = this.props;
     return (
       <div className="container">
         <div className="categorias__list">
           { categorias.map(({ name, id }) => (
             <button
               key={ id }
+              id={ id }
               className="categoria__btn"
               data-testid="category"
+              onClick={ handleCategory }
             >
               {name}
 
@@ -48,24 +38,6 @@ export default class Home extends Component {
           ))}
         </div>
         <div>
-          {/* Input e button requisito 5 */}
-          <input
-            type="text"
-            name="nomeProduto"
-            id="nomeProduto"
-            value={ nomeProduto }
-            data-testid="query-input"
-            onChange={ this.handleChange }
-          />
-          <button
-            data-testid="query-button"
-            onClick={ this.handleSearch }
-          >
-            Pesquisar
-          </button>
-
-          {/* Link requisito 3 - redireciona para a pagina ShoppingCart */}
-          <Link to="/shoppingcart" data-testid="shopping-cart-button">Carrinho</Link>
           <h3 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h3>
@@ -92,3 +64,14 @@ export default class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  nomeProduto: PropTypes.string.isRequired,
+  produtos: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
+    id: PropTypes.string,
+  })).isRequired,
+  handleCategory: PropTypes.func.isRequired,
+};
