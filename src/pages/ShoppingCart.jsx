@@ -24,6 +24,16 @@ export default class ShoppingCart extends Component {
     }
   };
 
+  handleDeleteProduct = ({ target }) => {
+    const { savedProducts } = this.state;
+    const newSavedProducts = savedProducts.filter(({ id }) => id !== target.id);
+
+    this.setState({
+      savedProducts: newSavedProducts,
+    });
+    localStorage.setItem('cart', JSON.stringify(newSavedProducts));
+  };
+
   render() {
     const { savedProducts } = this.state;
 
@@ -38,9 +48,27 @@ export default class ShoppingCart extends Component {
               <p data-testid="shopping-cart-product-name" style={ { width: '200px' } }>
                 {title}
               </p>
-              <button onClick={ () => this.updateQuantity(id, 'decrease') }>-</button>
+              <button
+                onClick={ () => this.updateQuantity(id, 'decrease') }
+                data-testid="product-decrease-quantity"
+              >
+                -
+              </button>
               <p data-testid="shopping-cart-product-quantity">{quantity}</p>
-              <button onClick={ () => this.updateQuantity(id, 'increase') }>+</button>
+              <button
+                onClick={ () => this.updateQuantity(id, 'increase') }
+                data-testid="product-increase-quantity"
+              >
+                +
+              </button>
+              <button
+                className="button-cart"
+                id={ id }
+                onClick={ this.handleDeleteProduct }
+                data-testid="remove-product"
+              >
+                Remover produto
+              </button>
               <p>{price}</p>
             </div>
           ))
