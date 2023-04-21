@@ -3,3 +3,21 @@ body {
   height: 100vh;
 }
 
+.cart-product {
+  align-items: center;
+  background-color: #212423;
+  border-top: 1px solid #87bb6f91;
+  display: flex;
+  font-weight: 700;
+  justify-content: space-between;
+  margin: 0.8em;
+  padding: 10px;
+  width: 600px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}

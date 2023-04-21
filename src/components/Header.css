@@ -46,7 +46,23 @@ h3 {
   background-color: #2aac7e;
 }
 
-.nav__header a > img {
+.icon-container {
+  position: relative;
+}
+
+.icon-container p {
+  background-color: white;
+  border-radius: 50%;
+  color: #2fc18f;
+  padding: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.cart-icon {
   height: 50px;
   width: 50px;
 }
