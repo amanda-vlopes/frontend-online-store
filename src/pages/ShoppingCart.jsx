@@ -2,33 +2,44 @@ import React, { Component } from 'react';
 import './ShoppingCart.css';
 
 export default class ShoppingCart extends Component {
+  state = {
+    savedProducts: JSON.parse(localStorage.getItem('cart')) || [],
+  };
+
+  updateQuantity = (id, action) => {
+    const DECREMENT = -1;
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const product = cart.find((item) => item.id === id);
+
+    if (product.quantity >= 2 || action !== 'decrease') {
+      product.quantity += action === 'decrease' ? DECREMENT : 1;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      this.setState({ savedProducts: cart });
+    }
+  };
+
   render() {
-    const savedProducts = JSON.parse(localStorage.getItem('cart')) || [];
-    console.log(savedProducts.length);
+    const { savedProducts } = this.state;
+
     return (
       <div>
-        { !savedProducts.length ? (
-          <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3>)
-          : (
-            savedProducts.map(({ id, title, img, price, quantity }) => (
-              <div
-                key={ id }
-                className="cart-product"
-              >
-                <img src={ img } alt={ title } />
-                <p
-                  data-testid="shopping-cart-product-name"
-                >
-                  {title}
-                </p>
-                <p
-                  data-testid="shopping-cart-product-quantity"
-                >
-                  {quantity}
-                </p>
-                <p>{price}</p>
-              </div>
-            )))}
+        {!savedProducts.length ? (
+          <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3>
+        ) : (
+          savedProducts.map(({ id, title, img, price, quantity }) => (
+            <div key={ id } className="cart-product">
+              <img style={ { borderRadius: '6px' } } src={ img } alt={ title } />
+              <p data-testid="shopping-cart-product-name" style={ { width: '200px' } }>
+                {title}
+              </p>
+              <button onClick={ () => this.updateQuantity(id, 'decrease') }>-</button>
+              <p data-testid="shopping-cart-product-quantity">{quantity}</p>
+              <button onClick={ () => this.updateQuantity(id, 'increase') }>+</button>
+              <p>{price}</p>
+            </div>
+          ))
+        )}
       </div>
     );
   }
