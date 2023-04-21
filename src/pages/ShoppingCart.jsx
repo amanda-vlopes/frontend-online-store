@@ -6,13 +6,9 @@ export default class ShoppingCart extends Component {
     savedProducts: JSON.parse(localStorage.getItem('cart')) || [],
   };
 
-  dispatchCartUpdateEvent = () => {
-    const cartUpdateEvent = new Event('cartUpdate');
-    window.dispatchEvent(cartUpdateEvent);
-  };
-
   updateQuantity = (id, action) => {
     const DECREMENT = -1;
+
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const product = cart.find((item) => item.id === id);
 
@@ -20,7 +16,6 @@ export default class ShoppingCart extends Component {
       product.quantity += action === 'decrease' ? DECREMENT : 1;
       localStorage.setItem('cart', JSON.stringify(cart));
       this.setState({ savedProducts: cart });
-      this.dispatchCartUpdateEvent();
     }
   };
 
