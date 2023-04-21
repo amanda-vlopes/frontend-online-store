@@ -14,25 +14,9 @@ export default class Home extends Component {
     this.setState({ categorias });
   }
 
-  handleAddToCart = (event, img, price, title) => {
-    const { id } = event.target;
-    price = price.toLocaleString(
-      'pt-BR',
-      { style: 'currency', currency: 'BRL' },
-    );
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const product = cart.find((item) => item.id === id);
-    if (product) {
-      product.quantity += 1;
-    } else {
-      cart.push({ id, title, img, price, quantity: 1 });
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-  };
-
   render() {
     const { categorias } = this.state;
-    const { produtos, nomeProduto, handleCategory } = this.props;
+    const { produtos, nomeProduto, handleCategory, handleAddToCart } = this.props;
     return (
       <>
         <div className="home-message">
@@ -81,7 +65,7 @@ export default class Home extends Component {
                   <button
                     data-testid="product-add-to-cart"
                     onClick={ (event) => {
-                      this.handleAddToCart(event, thumbnail, price, title);
+                      handleAddToCart(event, thumbnail, price, title);
                     } }
                     id={ id }
                   >
@@ -109,4 +93,5 @@ Home.propTypes = {
     thumbnail: PropTypes.string,
     id: PropTypes.string,
   })).isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
 };
