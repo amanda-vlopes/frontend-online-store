@@ -79,29 +79,6 @@ export default class Home extends Component {
               </li>
             ))}
           </ul>
-                  <Link
-                    key={ id }
-                    to={ `product/${id}` }
-                    data-testid="product-detail-link"
-                  >
-                    <img src={ thumbnail } alt={ title } />
-                    <p>{ title }</p>
-                    <p>{ price }</p>
-                  </Link>
-                  <button
-                    data-testid="product-add-to-cart"
-                    onClick={ (event) => {
-                      handleAddToCart(event, thumbnail, price, title);
-                      window.dispatchEvent(new Event('cartUpdate'));
-                    } }
-                    id={ id }
-                  >
-                    Adicionar ao carrinho
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
     );
