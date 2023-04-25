@@ -32,6 +32,7 @@ export default class ShoppingCart extends Component {
       savedProducts: newSavedProducts,
     });
     localStorage.setItem('cart', JSON.stringify(newSavedProducts));
+    window.dispatchEvent(new Event('cartUpdate'));
   };
 
   render() {
