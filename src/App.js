@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
+import Checkout from './pages/Checkout';
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
 import ShoppingCart from './pages/ShoppingCart';
@@ -85,6 +86,7 @@ class App extends React.Component {
                 handleAddToCart={ this.handleAddToCart }
               />) }
           />
+          <Route exact path="/checkout" component={ Checkout } />
         </Switch>
       </div>
     );
