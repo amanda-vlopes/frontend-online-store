@@ -66,7 +66,6 @@ class Form extends Component {
         dataTestid: 'product-detail-evaluation',
       },
     ];
-
     return (
       <>
         <form className="form__container">
@@ -123,8 +122,8 @@ class Form extends Component {
             onClick={ this.submitReview }
           >
             Avaliar
-          </button>
           {hasProblem ? <p data-testid="error-msg">Campos inválidos</p> : ''}
+          { hasProblem ? <p data-testid="error-msg">Campos inválidos</p> : ''}
         </form>
 
         <div>
