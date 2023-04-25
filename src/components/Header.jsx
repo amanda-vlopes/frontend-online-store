@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import searchIcon from '../assets/seachIcon.svg';
 import logo from '../assets/logo.svg';
 import cartIcon from '../assets/cart.svg';
 import './Header.css';
@@ -32,7 +33,7 @@ export default class Header extends Component {
 
     return (
       <header className="nav__header">
-        <div>
+        <div className="nav__search">
           <input
             type="text"
             name="nomeProduto"
@@ -40,16 +41,18 @@ export default class Header extends Component {
             value={ nomeProduto }
             data-testid="query-input"
             onChange={ handleChange }
+            placeholder="Digite o que você busca"
           />
           <button
+            className="search__button"
             data-testid="query-button"
             onClick={ handleSearch }
           >
-            Pesquisar
+            <img src={ searchIcon } alt="search-icon" />
           </button>
         </div>
         <Link to="/">
-          <img src={ logo } alt="Logo" />
+          <img src={ logo } alt="Logo" className="nav__logo" />
         </Link>
         <Link to="/shoppingcart" data-testid="shopping-cart-button">
           <div className="icon-container">

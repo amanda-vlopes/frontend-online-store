@@ -1,0 +1,10 @@
+.form__container {
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__email-rating label {
+  color: black;
+  margin-left: 1em;
+}

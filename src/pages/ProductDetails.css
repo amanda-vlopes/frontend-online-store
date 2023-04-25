@@ -1,13 +1,28 @@
-button {
-  background-color: #2fc18f;
-  border: none;
-  border-radius: 8px;
-  font-size: 1em;
-  margin-top: 5px;
-  padding: 8px;
+.products__details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 2em;
+  width: 100%;
 }
 
-button:hover {
-  background-color: #2aac7e;
+.card__products {
+  width: 100%;
+}
+
+.card__products p {
+  color: black;
+  font-size: 1.5em;
+}
+
+.card__products button {
+  background-color: #31c28d;
   cursor: pointer;
+  padding: 0.5em 1em;
+}
+
+.card__products button:hover {
+  background-color: #028253;
+  transform: scale(1.1);
+  transition: 0.5s;
 }

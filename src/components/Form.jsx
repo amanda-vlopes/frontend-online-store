@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { React, Component } from 'react';
+import './Form.css';
 
 class Form extends Component {
   state = {
@@ -46,80 +47,76 @@ class Form extends Component {
   render() {
     const { idDoProduto } = this.props;
     const { email, rating, text, hasProblem } = this.state;
+    const formContent = [
+      {
+        type: 'email',
+        name: 'email',
+        placeholder: 'Email',
+        dataTestid: 'product-detail-email',
+        className: 'form__email',
+      },
+      {
+        type: 'radio',
+        name: 'rating',
+        values: ['1', '2', '3', '4', '5'],
+      },
+      {
+        type: 'textarea',
+        name: 'text',
+        dataTestid: 'product-detail-evaluation',
+      },
+    ];
+
     return (
       <>
-        <form>
-          <input
-            type="email"
-            name="email"
-            data-testid="product-detail-email"
-            placeholder="Email"
-            value={ email }
-            onChange={ this.handleChange }
-            style={ { color: 'black' } }
-          />
-          <label htmlFor="">
-            1
-            <input
-              type="radio"
-              name="rating"
-              value="1"
-              data-testid="1-rating"
-              onChange={ this.handleChange }
-              checked={ rating === '1' }
-            />
-          </label>
-          <label htmlFor="">
-            2
-            <input
-              type="radio"
-              name="rating"
-              value="2"
-              data-testid="2-rating"
-              onChange={ this.handleChange }
-              checked={ rating === '2' }
-            />
-          </label>
-          <label htmlFor="">
-            3
-            <input
-              type="radio"
-              name="rating"
-              value="3"
-              data-testid="3-rating"
-              onChange={ this.handleChange }
-              checked={ rating === '3' }
-            />
-          </label>
-          <label htmlFor="">
-            4
-            <input
-              type="radio"
-              name="rating"
-              value="4"
-              data-testid="4-rating"
-              onChange={ this.handleChange }
-              checked={ rating === '4' }
-            />
-          </label>
-          <label htmlFor="">
-            5
-            <input
-              type="radio"
-              name="rating"
-              value="5"
-              data-testid="5-rating"
-              onChange={ this.handleChange }
-              checked={ rating === '5' }
-            />
-          </label>
-          <textarea
-            name="text"
-            data-testid="product-detail-evaluation"
-            value={ text }
-            onChange={ this.handleChange }
-            style={ { color: 'black' } }
-          />
+        <form className="form__container">
+          <div className="form__email-rating">
+            {formContent.map((items) => {
+              if (items.type === 'email') {
+                return (
+                  <input
+                    key={ items.name }
+                    type={ items.type }
+                    name={ items.name }
+                    data-testid={ items.dataTestid }
+                    placeholder={ items.placeholder }
+                    value={ email }
+                    onChange={ this.handleChange }
+                    style={ { color: 'black' } }
+                    className={ items.className }
+                  />
+                );
+              }
+              if (items.type === 'radio') {
+                return items.values.map((value) => (
+                  <label key={ value }>
+                    {value}
+                    <input
+                      type={ items.type }
+                      name={ items.name }
+                      value={ value }
+                      data-testid={ `${value}-rating` }
+                      onChange={ this.handleChange }
+                      checked={ rating === value }
+                    />
+                  </label>
+                ));
+              }
+              if (items.type === 'textarea') {
+                return (
+                  <textarea
+                    key={ items.name }
+                    name={ items.name }
+                    data-testid={ items.dataTestid }
+                    value={ text }
+                    onChange={ this.handleChange }
+                    style={ { color: 'black' } }
+                  />
+                );
+              }
+              return null;
+            })}
+          </div>
           <button
             type="button"
             data-testid="submit-review-btn"
@@ -127,7 +124,7 @@ class Form extends Component {
           >
             Avaliar
           </button>
-          { hasProblem ? <p data-testid="error-msg">Campos inválidos</p> : ''}
+          {hasProblem ? <p data-testid="error-msg">Campos inválidos</p> : ''}
         </form>
         <div>
           {JSON.parse(localStorage.getItem(idDoProduto))?.map((element, index) => (
