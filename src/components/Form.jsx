@@ -6,32 +6,46 @@ class Form extends Component {
     email: '',
     rating: '',
     text: '',
+    hasProblem: false,
   };
 
   submitReview = () => {
     const { email, rating, text } = this.state;
     const { idDoProduto } = this.props;
+    const valida = !email || !rating;
     const obj = {
       avaliacoes: JSON.parse(localStorage.getItem(idDoProduto)) || [],
     };
-    obj.avaliacoes.push({
+    obj.avaliacoes.unshift({
       email,
       rating,
       text });
-    localStorage.setItem(idDoProduto, JSON.stringify(obj.avaliacoes));
+    if (valida) {
+      this.setState({
+        hasProblem: true,
+      });
+    } else {
+      localStorage.setItem(idDoProduto, JSON.stringify(obj.avaliacoes));
+      this.setState({
+        hasProblem: false,
+        email: '',
+        rating: '',
+        text: '',
+      });
+    }
   };
 
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
       [name]: value,
+      hasProblem: false,
     });
   };
 
   render() {
     const { idDoProduto } = this.props;
-    const { email, rating, text } = this.state;
-    console.log(localStorage.getItem(idDoProduto));
+    const { email, rating, text, hasProblem } = this.state;
     return (
       <>
         <form>
@@ -113,20 +127,21 @@ class Form extends Component {
           >
             Avaliar
           </button>
+          { hasProblem ? <p data-testid="error-msg">Campos inválidos</p> : ''}
         </form>
         <div>
           {JSON.parse(localStorage.getItem(idDoProduto))?.map((element, index) => (
             <div key={ index }>
               <p data-testid="review-card-email">
-                {'Email: '}
+                {/* {'Email: '} */}
                 {element.email}
               </p>
               <p data-testid="review-card-rating">
-                {'Rating: '}
+                {/* {'Rating: '} */}
                 {element.rating}
               </p>
               <p data-testid="review-card-evaluation">
-                {'Comentário: '}
+                {/* {'Comentário: '} */}
                 {element.text}
               </p>
             </div>
