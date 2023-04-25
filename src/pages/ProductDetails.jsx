@@ -24,18 +24,18 @@ class ProductDetails extends Component {
     const { title, thumbnail, price } = product;
     const { params: { id } } = match;
     return (
-      <>
+      <div className="products__details">
         <div className="card__products">
-          <p data-testid="product-detail-name">
-            {' '}
-            { title }
-            {' '}
-          </p>
           <img
             src={ thumbnail }
             alt={ title }
             data-testid="product-detail-image"
           />
+          <p data-testid="product-detail-name">
+            {' '}
+            { title }
+            {' '}
+          </p>
           <p data-testid="product-detail-price">{`R$ ${price}`}</p>
           <button
             data-testid="product-detail-add-to-cart"
@@ -47,7 +47,7 @@ class ProductDetails extends Component {
         <div>
           <Form idDoProduto={ id } />
         </div>
-      </>
+      </div>
     );
   }
 }
