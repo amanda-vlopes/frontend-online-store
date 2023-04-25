@@ -126,6 +126,7 @@ class Form extends Component {
           </button>
           {hasProblem ? <p data-testid="error-msg">Campos inválidos</p> : ''}
         </form>
+
         <div>
           {JSON.parse(localStorage.getItem(idDoProduto))?.map((element, index) => (
             <div key={ index }>
