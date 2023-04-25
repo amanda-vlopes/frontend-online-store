@@ -39,7 +39,10 @@ class ProductDetails extends Component {
           <p data-testid="product-detail-price">{`R$ ${price}`}</p>
           <button
             data-testid="product-detail-add-to-cart"
-            onClick={ (event) => handleAddToCart(event, thumbnail, price, title) }
+            onClick={ (event) => {
+              handleAddToCart(event, thumbnail, price, title);
+              window.dispatchEvent(new Event('cartUpdate'));
+            } }
           >
             Adicionar ao carrinho
           </button>

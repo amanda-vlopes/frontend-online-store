@@ -54,7 +54,7 @@ export default class Header extends Component {
         <Link to="/shoppingcart" data-testid="shopping-cart-button">
           <div className="icon-container">
             <img className="cart-icon" src={ cartIcon } alt="cart-icon" />
-            <p>{ cartProductsTotal }</p>
+            <p data-testid="shopping-cart-size">{ cartProductsTotal }</p>
           </div>
         </Link>
       </header>
