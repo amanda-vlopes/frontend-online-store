@@ -18,66 +18,69 @@ export default class Home extends Component {
     const { categorias } = this.state;
     const { produtos, nomeProduto, handleCategory, handleAddToCart } = this.props;
     return (
-      <>
-        <div className="home-message">
-          <h3 data-testid="home-initial-message">
+      <div className="container">
+        <div className="categorias__list">
+          <h1 className="categorias__title">Categorias</h1>
+          { categorias.map(({ name, id }) => (
+            <button
+              key={ id }
+              id={ id }
+              className="categoria__btn"
+              data-testid="category"
+              onClick={ handleCategory }
+            >
+              {name}
+
+            </button>
+          ))}
+        </div>
+        <div className="card__container">
+          <h3 data-testid="home-initial-message" className="home-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h3>
-          <h3>
+          <h3 className="home-message">
             {produtos.length > 0
               ? `Produtos relacionados a: ${nomeProduto}`
               : 'Nenhum produto foi encontrado'}
           </h3>
-        </div>
-        <div className="container">
-          <div className="categorias__list">
-            { categorias.map(({ name, id }) => (
-              <button
+          <ul>
+            { produtos.map(({ title, price, thumbnail, id }) => (
+              <li
                 key={ id }
                 id={ id }
-                className="categoria__btn"
-                data-testid="category"
-                onClick={ handleCategory }
+                data-testid="product"
+                className="card__products"
               >
-                {name}
-
-              </button>
-            ))}
-          </div>
-          <div>
-            <ul>
-              { produtos.map(({ title, price, thumbnail, id }) => (
-                <li
+                <Link
                   key={ id }
-                  id={ id }
-                  data-testid="product"
-                  className="card__products"
+                  to={ `product/${id}` }
+                  data-testid="product-detail-link"
                 >
-                  <Link
-                    key={ id }
-                    to={ `product/${id}` }
-                    data-testid="product-detail-link"
-                  >
-                    <img src={ thumbnail } alt={ title } />
-                    <p>{ title }</p>
-                    <p>{ price }</p>
-                  </Link>
-                  <button
-                    data-testid="product-add-to-cart"
-                    onClick={ (event) => {
-                      handleAddToCart(event, thumbnail, price, title);
-                      window.dispatchEvent(new Event('cartUpdate'));
-                    } }
-                    id={ id }
-                  >
-                    Adicionar ao carrinho
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+                  <img
+                    src={ thumbnail }
+                    alt={ title }
+                  />
+                  <h1>{ title }</h1>
+                  <p>
+                    <span style={ { color: 'black' } }>R$</span>
+                    {' '}
+                    { price }
+                  </p>
+                </Link>
+                <button
+                  data-testid="product-add-to-cart"
+                  onClick={ (event) => {
+                    handleAddToCart(event, thumbnail, price, title);
+                  } }
+                  id={ id }
+                >
+                  Adicionar ao carrinho
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
-      </>
+      </div>
     );
   }
 }
