@@ -10,12 +10,6 @@ export default class Checkout extends Component {
   render() {
     const { savedProducts } = this.state;
     const { history } = this.props;
-    const valorTotal = savedProducts.reduce((result, { quantity }) => (
-      <p>
-        {result + quantity}
-      </p>
-    ));
-    console.log(valorTotal);
     return (
       <div>
         <div>
@@ -30,7 +24,6 @@ export default class Checkout extends Component {
               <p>{ price }</p>
             </div>
           ))}
-          <p>{ valorTotal }</p>
         </div>
         <FormCheckout history={ history } />
       </div>
