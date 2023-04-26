@@ -10,8 +10,12 @@ export default class Checkout extends Component {
   render() {
     const { savedProducts } = this.state;
     const { history } = this.props;
-    const valorTotal = savedProducts.reduce((acc, curr) => acc + curr.quantity);
-    console.log(history);
+    const valorTotal = savedProducts.reduce((result, { quantity }) => (
+      <p>
+        {result + quantity}
+      </p>
+    ));
+    console.log(valorTotal);
     return (
       <div>
         <div>
