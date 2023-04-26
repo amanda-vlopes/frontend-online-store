@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getCategories } from '../services/api';
 import './Home.css';
 
@@ -71,6 +71,7 @@ export default class Home extends Component {
                   data-testid="product-add-to-cart"
                   onClick={ (event) => {
                     handleAddToCart(event, thumbnail, price, title);
+                    window.dispatchEvent(new Event('cartUpdate'));
                   } }
                   id={ id }
                 >

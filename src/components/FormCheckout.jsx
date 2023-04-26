@@ -28,9 +28,6 @@ export default class FormCheckout extends Component {
     const { history } = this.props;
     const isNameValid = nome.length > 0;
     const isEmailValid = email.length > 0;
-    // const onze = 11;
-    // const nove = 9;
-    // const oito = 8;
     const isCpfValid = cpf.length > 0;
     const isPhoneValid = telefone.length > 0;
     const isCepValid = cep.length > 0;
